@@ -7,6 +7,7 @@ const vacaCategory_DAO = require('../controller/vacaCategoryDAO')
 const toroCategory_DAO = require('../controller/toroCategoryDAO')
 const becerroCategory_DAO = require('../controller/becerroCategoryDAO')
 
+verificacion = require("../validacion")
 
 router.get('/allCategorias',async(req,res)=>{
     const categorias =  await categoria_DAO.prototype.listCategorias()
@@ -103,14 +104,29 @@ router.post('/updateBecerroByCategory',async(req,res)=>{ //Incompleto. Falta act
     })
 })
 
-router.post('/deleteBecerroByCategory',async(req,res)=>{ //Incompleto. Falta actualizar la categoria
+router.post('/deleteBecerroByCategory',verificacion, async(req,res)=>{ //Incompleto. Falta actualizar la categoria
+    console.log(req.body.id);
     await becerroCategory_DAO.prototype.deleteBecerroCategoria(req.body.id).then(function (user){
-        valores = user.dataValues;
-        console.log(valores);
-        res.send(valores)
+
+        res.send(user);
     })
 })
 
+router.post('/deleteVacaByCategory',verificacion, async(req,res)=>{ //Incompleto. Falta actualizar la categoria
+    console.log(req.body.id);
+    await vacaCategory_DAO.prototype.deleteVacaCategoria(req.body.id).then(function (user){
+
+        res.send(user);
+    })
+})
+
+router.post('/deleteToroByCategory',verificacion, async(req,res)=>{ //Incompleto. Falta actualizar la categoria
+    console.log(req.body.id);
+    await toroCategory_DAO.prototype.deleteToroCategoria(req.body.id).then(function (user){
+
+        res.send(user);
+    })
+})
 router.post('/findCategoryBecerroByIdBecerro',async(req,res)=>{ //Incompleto. Falta actualizar la categoria
     await becerroCategory_DAO.prototype.findCategoryByIdBecerro(req.body.id_becerro).then(function (user){
         console.log(user);

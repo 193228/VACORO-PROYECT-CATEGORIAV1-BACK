@@ -26,7 +26,8 @@ class becerroCategory {
 
     async deleteBecerroCategoria(idAnimal){
         try {
-            return await becerro_category_model.destroy({where:{id:idAnimal}})//game.create(usuario)
+            await becerro_category_model.destroy({where:{id_becerro:idAnimal}})//game.create(usuario)
+            return  {status:'ok'}
         } catch (error) {
             return error
         }
